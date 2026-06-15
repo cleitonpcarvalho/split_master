@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: #0f1f3d;
+  background: #ffffff;
+}
+
+::selection {
+  color: #0f1f3d;
+  background: rgba(0, 196, 140, 0.28);
+}
+
+@keyframes quiz-question-enter {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.quiz-question-enter {
+  animation: quiz-question-enter 280ms ease-out;
+}
+
+@layer components {
+  .field-select {
+    @apply min-h-11 w-full rounded-xl border border-navy/10 bg-white px-3 text-sm font-semibold text-navy outline-none transition focus:border-green;
+  }
+}

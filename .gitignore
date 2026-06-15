@@ -1,0 +1,29 @@
+# Dependências
+node_modules/
+frontend/node_modules/
+backend/node_modules/
+
+# Builds e caches
+dist/
+.next/
+coverage/
+frontend/.next/
+frontend/out/
+backend/dist/
+*.tsbuildinfo
+
+# Variáveis locais e segredos
+.env
+.env.*
+!.env.example
+frontend/.env.local
+backend/.env
+
+# Sistema e editores
+.DS_Store
+.idea/
+.vscode/
+
+# Logs
+*.log
+npm-debug.log*
