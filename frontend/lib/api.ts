@@ -5,9 +5,9 @@ import {
   getStoredToken,
 } from "./auth";
 
-const apiUrl =
-  process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "") ??
-  "http://localhost:3001";
+const apiUrl = (
+  process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001"
+).replace(/\/$/, "");
 
 interface ApiResponse<T> {
   success: boolean;

@@ -9,11 +9,39 @@ import { apiRouter } from "./routes/index.js";
 
 export const app = express();
 
+function normalizeOrigin(origin: string): string {
+  const trimmedOrigin = origin.trim().replace(/\/$/, "");
+
+  try {
+    return new URL(trimmedOrigin).origin;
+  } catch {
+    return trimmedOrigin;
+  }
+}
+
+const configuredFrontendOrigins = env.frontendUrl
+  .split(",")
+  .map(normalizeOrigin)
+  .filter(Boolean);
+
+const allowedCorsOrigins = new Set([
+  "http://localhost:3000",
+  "https://splitmasterfrontend-production.up.railway.app",
+  ...configuredFrontendOrigins,
+]);
+
 app.disable("x-powered-by");
 app.use(helmet());
 app.use(
   cors({
-    origin: env.frontendUrl,
+    origin(origin, callback) {
+      if (!origin || allowedCorsOrigins.has(normalizeOrigin(origin))) {
+        callback(null, true);
+        return;
+      }
+
+      callback(new Error("Origem não permitida pelo CORS."));
+    },
     credentials: true,
   }),
 );
